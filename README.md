@@ -1,4 +1,5 @@
 # 收集
+# [Wiki] (https://github.com/ygxqqx/collection/wiki)
 
 * [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
