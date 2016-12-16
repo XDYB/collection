@@ -43,7 +43,7 @@ function delegate(element, targetSelector, type, handler) {
 
 * 用正则匹配,替换目标字符
 ```
-icdSearchProcess: function (srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
+function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
     var reg1 = /(\[就诊\.诊断\.标准化后的诊断名称\])\s+?(包含|不包含)\s+?([\u4E00-\u9FFF\w,]+)/g;
     var reg2 = /(\[就诊\.诊断\.标准化后的疾病编码（ICD10）\])\s+?(包含|不包含)\s+?([\w,]+)/g;
@@ -55,7 +55,7 @@ icdSearchProcess: function (srchStr, icdMap) { // srchStr为处理的字符串�
 		for (var i = 0; i < array.length; ++i) {
 
 		    if (icdMap[array[i]] && icdMap[array[i]] !== "") {
-			mm3 = mm3 + "," + icdMap[array[i]];
+				mm3 = mm3 + "," + icdMap[array[i]];
 		    }
 		}
 
@@ -63,9 +63,9 @@ icdSearchProcess: function (srchStr, icdMap) { // srchStr为处理的字符串�
 		    mm3 = mm3.substr(1);
 
 		    if (m1 === "[就诊.诊断.标准化后的诊断名称]") {
-			return "[就诊.诊断.标准化后的疾病编码（ICD10）]" + " " + m2 + " " + mm3;
+				return "[就诊.诊断.标准化后的疾病编码（ICD10）]" + " " + m2 + " " + mm3;
 		    } else {
-			return m1 + " " + m2 + " " + mm3;
+				return m1 + " " + m2 + " " + mm3;
 		    }
 		} else {
 		    return match;
