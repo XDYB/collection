@@ -41,7 +41,7 @@ function delegate(element, targetSelector, type, handler) {
 }
 ```
 
-* 用正则匹配,替换目标字符
+### 用正则匹配,替换目标字符
 ```
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
