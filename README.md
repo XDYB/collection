@@ -1,9 +1,9 @@
 # 收集
 # [Wiki] (https://github.com/ygxqqx/collection/wiki)
 
-* [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
+# [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
-    * jsonp原理
+    * jsonp原理
         
 ```
         <script>
@@ -15,7 +15,7 @@
 ```
 ---
 
-* [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
+# [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
     * 「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
     
@@ -29,7 +29,7 @@
 ```
 ---
 
-* 用原生JavaScript实现事件代理
+# 用原生JavaScript实现事件代理
 
 ```
 function delegate(element, targetSelector, type, handler) {
@@ -45,7 +45,7 @@ function delegate(element, targetSelector, type, handler) {
 ```
 ----
 
-### 用正则匹配,替换目标字符串
+# 用正则匹配,替换目标字符串
 ```
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
