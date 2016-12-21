@@ -13,6 +13,7 @@
         </script>
         <script src="http://api.jirengu.com/weather.php?callback=showData"></script>
 ```
+---
 
 * [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
@@ -24,7 +25,9 @@
          console.log();
       }
 
+
 ```
+---
 
 * 用原生JavaScript实现事件代理
 
@@ -40,8 +43,9 @@ function delegate(element, targetSelector, type, handler) {
 	}, false);
 }
 ```
+---
 
-### 用正则匹配,替换目标字符
+### ==用正则匹配,替换目标字符==
 ```
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
