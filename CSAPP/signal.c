@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <stdlib.h>
+#include "csapp.h"
 
 void hander(int sig) {
 	pid_t pid;
@@ -35,7 +29,9 @@ void main() {
 	}
 	
 	if ((n = read(STDIN_FILENO, buf, sizeof(buf))) < 0) {
-		printf("read err!\n");
+		if (errno != EINTR) {
+			printf("read err!\n");
+		}
 	} else {
 		printf("read succ!\n");
 	}
