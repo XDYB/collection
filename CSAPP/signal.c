@@ -1,4 +1,4 @@
-#include "csapp.h"
+#include "./tiny/csapp.h"
 
 void hander(int sig) {
 	pid_t pid;

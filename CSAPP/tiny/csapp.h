@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <strings.h>
 #include <arpa/inet.h>
+#include <string.h>
 
 
 int open_clientfd(char *hostname, int port);
