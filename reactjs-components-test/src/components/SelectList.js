@@ -47,6 +47,7 @@ class SelectList extends Component {
 		// let selectTarget = $(e.currentTarget);
 		e.preventDefault();
 		console.log(e.target.value);
+		// console.log(e.target.getAttribute("")); // 
 	}
 }
 
