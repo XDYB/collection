@@ -138,4 +138,29 @@ for (var x in a){
    foo
 */
 ```
+----
 
+# arguments 转化为数组
+
+### 使用Array的slice方法
+
+```
+Array.prototype.slice.call(arguments);
+```
+### 使用原生JavaScript实现自己的slice方法
+```
+Array.prototype.slice = function(start, end) {
+	var ret = [];
+	start = start || 0;
+	end = end || this.length;
+	for (let i = start; i < end; ++i) {
+		ret.push(this[i]);
+	}
+	return ret;
+};
+function test_slice() {
+	console.log(Array.prototype.slice.call(arguments));
+}
+test_slice(1, 2, 3, 5);
+// [ 1, 2, 3, 5 ]
+```
