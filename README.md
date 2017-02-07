@@ -5,7 +5,7 @@
 
     * jsonp原理
         
-```
+``` js
         <script>
             function showData(ret){
                 console.log(ret);
@@ -19,7 +19,7 @@
 
     * 「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
     
-```
+``` js
       var local = "变量";
       function foo() {
          console.log();
@@ -31,7 +31,7 @@
 
 # 用原生JavaScript实现事件代理
 
-```
+``` js
 function delegate(element, targetSelector, type, handler) {
 	element.addEventListener(type, function(event) {
 		var event = event || window.event;
@@ -46,7 +46,8 @@ function delegate(element, targetSelector, type, handler) {
 ----
 
 # 用正则匹配,替换目标字符串
-```
+
+``` js
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
     var reg1 = /(\[就诊\.诊断\.标准化后的诊断名称\])\s+?(包含|不包含)\s+?([\u4E00-\u9FFF\w,]+)/g;
@@ -84,7 +85,8 @@ function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，i
 # for...in 遍历的方式带来的情况
 
 ### The reason is that one construct:
-```
+
+``` js
 var a = []; // Create a new empty array.
 a[5] = 5;   // Perfectly legal JavaScript that resizes the array.
 
@@ -103,7 +105,8 @@ for (var i = 0; i < a.length; i++) {
 ```
 
 ### can sometimes be totally different from the other:
-```
+
+``` js
 var a = [];
 a[5] = 5;
 for (var x in a) {
@@ -117,7 +120,8 @@ for (var x in a) {
 ```
 
 ### Also consider that JavaScript libraries might do things like this, which will affect any array you create:
-```
+
+``` js
 // Somewhere deep in your JavaScript library...
 Array.prototype.foo = 1;
 
@@ -144,11 +148,12 @@ for (var x in a){
 
 ### 使用Array的slice方法
 
-```
+``` js
 Array.prototype.slice.call(arguments);
 ```
 ### 使用原生JavaScript实现自己的slice方法
-```
+
+``` js
 Array.prototype.slice = function(start, end) {
 	var ret = [];
 	start = start || 0;
