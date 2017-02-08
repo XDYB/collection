@@ -1,7 +1,7 @@
 # 收集
 # [Wiki] (https://github.com/ygxqqx/collection/wiki)
 
-# [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
+# &sect; [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
     * jsonp原理
         
@@ -15,7 +15,7 @@
 ```
 ---
 
-# [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
+# &sect; [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
     * 「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
     
@@ -45,7 +45,7 @@ function delegate(element, targetSelector, type, handler) {
 ```
 ----
 
-# 用正则匹配,替换目标字符串
+# &sect; 用正则匹配,替换目标字符串
 
 ``` js
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
@@ -82,7 +82,7 @@ function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，i
 }
 ```
 ---
-# for...in 遍历的方式带来的情况
+# &sect; for...in 遍历的方式带来的情况
 
 ### The reason is that one construct:
 
@@ -144,7 +144,7 @@ for (var x in a){
 ```
 ----
 
-# arguments 转化为数组
+# &sect; arguments 转化为数组
 
 ### 使用Array的slice方法
 
