@@ -29,7 +29,7 @@
 ```
 ---
 
-# 用原生JavaScript实现事件代理
+# &sect; 用原生JavaScript实现事件代理
 
 ``` js
 function delegate(element, targetSelector, type, handler) {
@@ -170,7 +170,7 @@ test_slice(1, 2, 3, 5);
 // [ 1, 2, 3, 5 ]
 ```
 ----
-# JavaScript 判断是否为数组
+# ⊙ JavaScript 判断是否为数组
 ```js
 function isArray(value){
 	if (typeof Array.isArray === 'function') {
