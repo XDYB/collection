@@ -3,7 +3,7 @@
 
 # &sect; [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
-    * jsonp原理
+>     jsonp原理
         
 ``` js
         <script>
