@@ -169,3 +169,14 @@ function test_slice() {
 test_slice(1, 2, 3, 5);
 // [ 1, 2, 3, 5 ]
 ```
+----
+# JavaScript 判断是否为数组
+```js
+function isArray(value){
+	if (typeof Array.isArray === 'function') {
+		return Array.isArray(value); 
+	} else {
+		return Object.prototype.toString.call(value) === '[object Array]'; 
+	} 
+}
+```
