@@ -10,12 +10,19 @@
 >     jsonp原理
         
 ``` js
-        <script>
-            window.__onGetData__ = function(ret) {
-                console.log(ret);
-            }
-        </script>
-        <script src="http://api.jirengu.com/weather.php?callback=__onGetData__"></script>
+<script>
+        var url = 'http://api.jirengu.com/weather.php?callback=__onGetData__';
+	window.__onGetData__ = function(ret) {
+	    console.log(ret);
+	}
+	function jsonp(url) {
+	    var script = document.createElement('script');
+	    script.src = url;
+	    document.head.appendChild(script);
+	    document.head.removeChild(script);
+	}
+	jsonp(url);
+</script>
 ```
 ---
 
