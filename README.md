@@ -1,7 +1,7 @@
 # 收集
-# [Wiki] (https://github.com/ygxqqx/collection/wiki)
+# [Wiki](https://github.com/ygxqqx/collection/wiki)
 
-# &sect; [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
+# &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
 >     jsonp原理
         
@@ -15,7 +15,7 @@
 ```
 ---
 
-# &sect; [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
+# &sect; [闭包](https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
 >     「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
     
