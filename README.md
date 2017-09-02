@@ -3,15 +3,19 @@
 
 # &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
+>     [效果](https://ygxqqx.github.io/collection/jsonp/)  
+
+>     [核心代码](https://github.com/ygxqqx/collection/issues/5)  
+
 >     jsonp原理
         
 ``` js
         <script>
-            function showData(ret){
+            window.__onGetData__ = function(ret) {
                 console.log(ret);
             }
         </script>
-        <script src="http://api.jirengu.com/weather.php?callback=showData"></script>
+        <script src="http://api.jirengu.com/weather.php?callback=__onGetData__"></script>
 ```
 ---
 
