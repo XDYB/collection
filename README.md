@@ -1,25 +1,36 @@
 # 收集
-# [Wiki] (https://github.com/ygxqqx/collection/wiki)
+# [Wiki](https://github.com/ygxqqx/collection/wiki)
 
-# [jsonp] (https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
+# &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
-    * jsonp原理
+>     [效果](https://ygxqqx.github.io/collection/jsonp/)  
+
+>     [核心代码](https://github.com/ygxqqx/collection/issues/5)  
+
+>     jsonp原理
         
-```
-        <script>
-            function showData(ret){
-                console.log(ret);
-            }
-        </script>
-        <script src="http://api.jirengu.com/weather.php?callback=showData"></script>
+``` js
+<script>
+        var url = 'http://api.jirengu.com/weather.php?callback=__onGetData__';
+	window.__onGetData__ = function(ret) {
+	    console.log(ret);
+	}
+	function jsonp(url) {
+	    var script = document.createElement('script');
+	    script.src = url;
+	    document.head.appendChild(script);
+	    document.head.removeChild(script);
+	}
+	jsonp(url);
+</script>
 ```
 ---
 
-# [闭包] (https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
+# &sect; [闭包](https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
-    * 「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
+>     「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
     
-```
+``` js
       var local = "变量";
       function foo() {
          console.log();
@@ -29,9 +40,9 @@
 ```
 ---
 
-# 用原生JavaScript实现事件代理
+# &sect; 用原生JavaScript实现事件代理
 
-```
+``` js
 function delegate(element, targetSelector, type, handler) {
 	element.addEventListener(type, function(event) {
 		var event = event || window.event;
@@ -45,8 +56,9 @@ function delegate(element, targetSelector, type, handler) {
 ```
 ----
 
-# 用正则匹配,替换目标字符串
-```
+# &sect; 用正则匹配,替换目标字符串
+
+``` js
 function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，icdMap为替换规则的JSON数据格式
 
     var reg1 = /(\[就诊\.诊断\.标准化后的诊断名称\])\s+?(包含|不包含)\s+?([\u4E00-\u9FFF\w,]+)/g;
@@ -81,10 +93,11 @@ function icdSearchProcess(srchStr, icdMap) { // srchStr为处理的字符串，i
 }
 ```
 ---
-# for...in 遍历的方式带来的情况
+# &sect; for...in 遍历的方式带来的情况
 
 ### The reason is that one construct:
-```
+
+``` js
 var a = []; // Create a new empty array.
 a[5] = 5;   // Perfectly legal JavaScript that resizes the array.
 
@@ -103,7 +116,8 @@ for (var i = 0; i < a.length; i++) {
 ```
 
 ### can sometimes be totally different from the other:
-```
+
+``` js
 var a = [];
 a[5] = 5;
 for (var x in a) {
@@ -117,7 +131,8 @@ for (var x in a) {
 ```
 
 ### Also consider that JavaScript libraries might do things like this, which will affect any array you create:
-```
+
+``` js
 // Somewhere deep in your JavaScript library...
 Array.prototype.foo = 1;
 
@@ -140,15 +155,16 @@ for (var x in a){
 ```
 ----
 
-# arguments 转化为数组
+# &sect; arguments 转化为数组
 
 ### 使用Array的slice方法
 
-```
+``` js
 Array.prototype.slice.call(arguments);
 ```
 ### 使用原生JavaScript实现自己的slice方法
-```
+
+``` js
 Array.prototype.slice = function(start, end) {
 	var ret = [];
 	start = start || 0;
@@ -163,4 +179,15 @@ function test_slice() {
 }
 test_slice(1, 2, 3, 5);
 // [ 1, 2, 3, 5 ]
+```
+----
+# ⊙ JavaScript 判断是否为数组
+```js
+function isArray(value){
+	if (typeof Array.isArray === 'function') {
+		return Array.isArray(value); 
+	} else {
+		return Object.prototype.toString.call(value) === '[object Array]'; 
+	} 
+}
 ```
