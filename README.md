@@ -44,14 +44,14 @@
 
 ``` js
 function delegate(element, targetSelector, type, handler) {
-	element.addEventListener(type, function(event) {
-		var event = event || window.event;
-		var targets = Array.prototype.slice.call(element.querySelectorAll(targetSelector));
-		var target = event.target || event.srcElement;;
-		if (targets.indexOf(target) != -1) {
-			return handler.apply(target, arguments);
-		}
-	}, false);
+    element.addEventListener(type, function(event) {
+        var event = event || window.event;
+        var targets = Array.prototype.slice.call(element.querySelectorAll(targetSelector));
+        var target = event.target || event.srcElement;;
+        if (targets.indexOf(target) != -1) {
+            return handler.apply(target, arguments);
+        }
+    }, false);
 }
 ```
 ----
@@ -166,16 +166,16 @@ Array.prototype.slice.call(arguments);
 
 ``` js
 Array.prototype.slice = function(start, end) {
-	var ret = [];
-	start = start || 0;
-	end = end || this.length;
-	for (let i = start; i < end; ++i) {
-		ret.push(this[i]);
-	}
-	return ret;
+    var ret = [];
+    start = start || 0;
+    end = end || this.length;
+    for (let i = start; i < end; ++i) {
+        ret.push(this[i]);
+    }
+    return ret;
 };
 function test_slice() {
-	console.log(Array.prototype.slice.call(arguments));
+    console.log(Array.prototype.slice.call(arguments));
 }
 test_slice(1, 2, 3, 5);
 // [ 1, 2, 3, 5 ]
@@ -184,10 +184,10 @@ test_slice(1, 2, 3, 5);
 # ⊙ JavaScript 判断是否为数组
 ```js
 function isArray(value){
-	if (typeof Array.isArray === 'function') {
-		return Array.isArray(value); 
-	} else {
-		return Object.prototype.toString.call(value) === '[object Array]'; 
-	} 
+    if (typeof Array.isArray === 'function') {
+        return Array.isArray(value); 
+    } else {
+        return Object.prototype.toString.call(value) === '[object Array]'; 
+    } 
 }
 ```
