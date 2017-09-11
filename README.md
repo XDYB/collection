@@ -191,3 +191,6 @@ function isArray(value){
     } 
 }
 ```
+
+
+记住“visibility:hidden”和“display：none”之间的不同，“visibility:hidden”将元素设置为不可见，但是同样在布局上占领一定空间（例如，它会被渲染成为空盒子），但是“display:none”的元素是将节点从整个render tree中移除，所以不是布局中的一部分 
