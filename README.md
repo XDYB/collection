@@ -33,7 +33,7 @@
 ``` js
       var local = "变量";
       function foo() {
-         console.log();
+         console.log(local);
       }
 
 
