@@ -11,6 +11,10 @@ ReactDOMTextComponent.prototype.mountComponent = function(rootID) {
     return '<span data-reactid="' + rootID + '">' + this._currentElement + '</span>';
 }
 
+ReactDOMTextComponent.prototype.receiveComponent = function(nextText) {
+    // TODO
+}
+
 // ReactElement就是虚拟dom的概念，具有一个type属性代表当前的节点类型，还有节点的属性props
 // 比如对于div这样的节点type就是div，props就是那些attributes
 // 另外这里的key,可以用来标识这个element，用于优化以后的更新，这里可以先不管，知道有这么个东西就好了
@@ -76,6 +80,12 @@ var ReactClass = function() {
 }
 // 留给子类去继承覆盖
 ReactClass.prototype.render = function() {}
+// setState
+ReactClass.prototype.setState = function(newState) {
+    // 还记得我们在ReactCompositeComponent里面mount的时候 做了赋值
+    // 所以这里可以拿到 对应的ReactCompositeComponent的实例_reactInternalInstance
+    this._reactInternalInstance.receiveComponent(null, newState);
+}
 
 function ReactCompositeComponent(element) {
     // 存放元素element对象
@@ -115,6 +125,62 @@ ReactCompositeComponent.prototype.mountComponent = function(rootID) {
         inst.componentDidMount && inst.componentDidMount();
     });
     return renderedMarkup;
+}
+// 更新
+ReactCompositeComponent.prototype.receiveComponent = function(nextElement, newState) {
+    // 如果接受了新的，就使用最新的element
+    this._currentElement = nextElement || this._currentElement;
+    let inst = this._instance;
+    // 合并state
+    let newState = Object.assign(inst.state, newState);
+    let nextProps = this._currentElement.props;
+
+    // 改写state
+    inst.state = newState;
+    // 如果inst有shouldComponentUpdate并且返回false。说明组件本身判断不要更新，就直接返回。
+    if (inst.shouldComponentUpdate && (inst.shouldComponentUpdate(nextProps, nextState) === false)) {
+        return ;
+    }
+    // 生命周期管理，如果有componentWillUpdate，就调用，表示开始要更新了。
+    if (inst.componentWillUpdat) {
+        inst.componentWillUpdat(nextProps, nextState);
+    }
+    let prevComponentInstance = this._renderedComponent;
+    let prevRenderedElement = prevComponentInstance._currentElement;
+    // 重新执行render拿到对应的新element;
+    let nextRenderedElement = this._instance.render();
+    // 判断是需要更新还是直接就重新渲染
+    // 注意这里的_shouldUpdateReactComponent跟上面的不同哦 这个是全局的方法
+    if (_shouldUpdateReactComponent(prevRenderedElement, nextRenderedElement)) {
+        // 如果需要更新，就继续调用子节点的receiveComponent的方法，传入新的element更新子节点。
+        prevComponentInstance.receiveComponent(nextRenderedElement);
+        // 用componentDidUpdate表示更新完成了
+        inst.componentDidUpdate && inst.componentDidUpdate();
+    } else {
+        // 如果发现完全是不同的两种element，那就干脆重新渲染了
+        let thisID = this._rootNodeID;
+        let thisID = this._rootNodeID;
+        this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
+        // 重新生成对应的元素内容
+        let nextMarkup = _renderedComponent.mountComponent(thisID);
+        // 替换整个节点
+        $('[data-reactid="' + this._rootNodeID + '"]').replaceWith(nextMarkup);
+    }
+}
+
+// 用来判定两个element需不需要更新
+// 这里的key是我们createElement的时候可以选择性的传入的。用来标识这个element，当发现key不同时，我们就可以直接重新渲染，不需要去更新了。
+let _shouldUpdateReactComponent ＝ function(prevElement, nextElement) {
+    if (prevElement != null && nextElement != null) {
+        let prevType = typeof prevElement;
+        let nextType = typeof nextElement;
+        if (prevType === 'string' || prevType === 'number') {
+            return nextType === 'string' || nextType === 'number';
+        } else {
+            return nextType === 'object' && prevElement.type === nextElement.type && prevElement.key === nextElement.key;
+        }
+    }
+    return false;
 }
 
 // component工厂  用来返回一个component实例
