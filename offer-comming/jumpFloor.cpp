@@ -6,8 +6,20 @@
 
 class Solution {
 public:
-    int jumpFloor(int number) {
+    int jumpFloor(int n) {
+        int num[] = {1, 2};
+        if (n <= 2) return num[n - 1];
         
+        int a = num[0];
+        int b = num[1];
+        n = n - 2;
+        while (n > 0) {
+            int c = a + b;
+            a = b;
+            b = c;
+            n--;
+        }
+        return b;
     }
 };
 
