@@ -5,6 +5,26 @@
 class Solution {
 public:
     void reOrderArray(vector<int> &array) {
-        
+        int len = array.size();
+        vector<int> arr;
+        for (int i = 0; i < len; ++i) {
+            if (array[i] % 2 != 0) {
+                arr.push_back(array[i]);
+            }
+        }
+        for (int i = 0; i < len; ++i) {
+            if (array[i] % 2 == 0) {
+                arr.push_back(array[i]);
+            }
+        }
+        array = arr;
     }
 };
+
+// 2 3 5 4 6 7 8
+// 3 5 7 2 4 6 8
+
+// 1 2 3 4 5 6 7 
+// 1 3 2 4 5 6 7 
+// 1 3 5 4 2 6 7 
+// 1 3 5 4 7 6 2 
