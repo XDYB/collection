@@ -11,10 +11,20 @@ public:
         stack<int> s;
         int push_i = 0;
         int pop_i = 0;
-        
+        while (push_i < pushV.size() && pop_i < popV.size()) {
+            if (s.empty()) {
+                s.push(pushV[push_i]);
+            }
+            if (s.top() == popV[pop_i]) {
+                s.pop();
+                pop_i++;
+            } else {
+                push_i++;
+                s.push(pushV[push_i]);
+            }
+        }
+        if (pop_i >= popV.size() && s.empty()) isPopOrder = true;
         return isPopOrder;
     }
 };
 
-// 1 2 3 4 5 2
-// 
