@@ -11,7 +11,7 @@
         
 ``` js
 <script>
-        var url = 'http://api.jirengu.com/weather.php?callback=__onGetData__';
+        var url = 'http://api.ygxqqx.com/weather.php?callback=__onGetData__';
 	window.__onGetData__ = function(ret) {
 	    console.log(ret);
 	}
