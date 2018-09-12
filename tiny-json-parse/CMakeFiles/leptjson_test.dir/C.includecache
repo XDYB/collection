@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/luoxupan/githubProject/collection/tiny-json-parse/leptjson.h
+
+/Users/luoxupan/githubProject/collection/tiny-json-parse/test.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+leptjson.h
+/Users/luoxupan/githubProject/collection/tiny-json-parse/leptjson.h
+
