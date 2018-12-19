@@ -7,6 +7,7 @@ RM=rm -rf
 build:
 	@echo Compiling codes...
 	$(CC) $(CFLAG) strcpy.c -o strcpy
+	$(CC) $(CFLAG) word_frequency.c -o word_frequency
 .PHONY: clean
 
 clean:
