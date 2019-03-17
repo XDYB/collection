@@ -1,3 +1,7 @@
+## [Issues](https://github.com/ygxqqx/collection/issues)
+
+## [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
+
 # 收集
 # [Wiki](https://github.com/ygxqqx/collection/wiki)
 
