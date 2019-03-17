@@ -8,11 +8,12 @@ function ReactDOMTextComponent(text) {
 // component渲染时生成的dom结构
 ReactDOMTextComponent.prototype.mountComponent = function(rootID) {
     this._rootNodeID = rootID;
-    return '<span data-reactid="' + rootID + '">' + this._currentElement + '</span>';
+    // return '<span data-reactid="' + rootID + '">' + this._currentElement + '</span>';
+    return this._currentElement;
 }
 
 ReactDOMTextComponent.prototype.receiveComponent = function(nextText) {
-    // TODO
+    // TODO:
 }
 
 // ReactElement就是虚拟dom的概念，具有一个type属性代表当前的节点类型，还有节点的属性props
@@ -35,10 +36,8 @@ ReactDOMComponent.prototype.mountComponent = function(rootID) {
     // 赋值标识
     this._rootNodeID = rootID;
     let props = this._currentElement.props;
-    let tagOpen = '<' + this._currentElement.type;
-    let tagClose = '</ ' + this._currentElement.type + '>';
-    // 加上reactid标识
-    tagOpen += ' data-reactid=' + rootID;
+    let tagOpen = `<${this._currentElement.type} data-reactid=${rootID}`;
+    let tagClose = `</${this._currentElement.type}>`;
     // 拼凑出属性
     for (let propKey in props) {
         // 这里要做一下事件的监听，就是从属性props里面解析拿出on开头的事件属性的对应事件监听
@@ -63,7 +62,7 @@ ReactDOMComponent.prototype.mountComponent = function(rootID) {
         childComponentInstance._mountIndex = key;
         childrenInstances.push(childComponentInstance);
         // 子节点的rootId是父节点的rootId加上新的key也就是顺序的值拼成的新值
-        let curRootId = this._rootNodeID + '.' + key;
+        let curRootId = `${this._rootNodeID}.${key}`;
         // 得到子节点的渲染内容
         let childMarkup = childComponentInstance.mountComponent(curRootId);
         // 拼接在一起
@@ -72,7 +71,7 @@ ReactDOMComponent.prototype.mountComponent = function(rootID) {
     // 留给以后更新时用的这边先不用管
     this._renderedChildren = childrenInstances;
     // 拼出整个html内容
-    return tagOpen + '>' + content + tagClose;
+    return `${tagOpen}>${content}${tagClose}`;
 }
 
 // 定义ReactClass类,所有自定义的超级父类
@@ -116,15 +115,24 @@ ReactCompositeComponent.prototype.mountComponent = function(rootID) {
     let renderedElement = this._instance.render();
     // 得到renderedElement对应的component类实例
     let renderedComponentInstance = instantiateReactComponent(renderedElement);
-    this._renderedComponent = renderedComponentInstance; // 存起来留作后用
+    // this._renderedComponent = renderedComponentInstance; // 存起来留作后用
+    this._renderedComponent = this; // 存起来留作后用
     // 拿到渲染之后的字符串内容，将当前的_rootNodeID传给render出的节点
     let renderedMarkup = renderedComponentInstance.mountComponent(this._rootNodeID);
+
+    let children = publicProps.children || [];
+    children.forEach((item, index) => renderedMarkup += instantiateReactComponent(item).mountComponent(`${this._rootNodeID}.${index}`));
+
     // 之前我们在React.render方法最后触发了mountReady事件，所以这里可以监听，在渲染完成后会触发。
     $(document).on('mountReady', function() {
         // 调用inst.componentDidMount
         inst.componentDidMount && inst.componentDidMount();
     });
-    return renderedMarkup;
+    let ret = renderedMarkup;
+    if (children.length > 0) {
+        ret = `<div>${renderedMarkup}</div>`;
+    }
+    return ret;
 }
 // 更新
 ReactCompositeComponent.prototype.receiveComponent = function(nextElement, newState) {
@@ -132,11 +140,12 @@ ReactCompositeComponent.prototype.receiveComponent = function(nextElement, newSt
     this._currentElement = nextElement || this._currentElement;
     let inst = this._instance;
     // 合并state
-    let newState = Object.assign(inst.state, newState);
+    let nextState = Object.assign(inst.state, newState);
     let nextProps = this._currentElement.props;
 
     // 改写state
-    inst.state = newState;
+    inst.state = nextState;
+    inst.props = nextProps;
     // 如果inst有shouldComponentUpdate并且返回false。说明组件本身判断不要更新，就直接返回。
     if (inst.shouldComponentUpdate && (inst.shouldComponentUpdate(nextProps, nextState) === false)) {
         return ;
@@ -159,10 +168,10 @@ ReactCompositeComponent.prototype.receiveComponent = function(nextElement, newSt
     } else {
         // 如果发现完全是不同的两种element，那就干脆重新渲染了
         let thisID = this._rootNodeID;
-        let thisID = this._rootNodeID;
-        this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
+        // this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
+        this._renderedComponent = instantiateReactComponent(nextRenderedElement);
         // 重新生成对应的元素内容
-        let nextMarkup = _renderedComponent.mountComponent(thisID);
+        let nextMarkup = this._renderedComponent.mountComponent(thisID);
         // 替换整个节点
         $('[data-reactid="' + this._rootNodeID + '"]').replaceWith(nextMarkup);
     }
@@ -203,7 +212,7 @@ function instantiateReactComponent(node) {
 }
 
 React = {
-    nextReactRootIndex: 0,
+    nextReactRootIndex: 1,
     createElement: function(type, config, children) {
         let props = {};
         config = config || {};
