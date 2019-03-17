@@ -2,7 +2,6 @@
 
 ## [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
 
-# 收集
 # [Wiki](https://github.com/ygxqqx/collection/wiki)
 
 # &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
