@@ -1,8 +1,8 @@
-## [Issues](https://github.com/ygxqqx/collection/issues)
+# [Issues](https://github.com/ygxqqx/collection/issues)
 
-## [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
+# [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
 
-# [Wiki](https://github.com/ygxqqx/collection/wiki)
+# [Wiki Home](https://github.com/ygxqqx/collection/wiki)
 
 # &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
