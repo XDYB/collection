@@ -4,7 +4,7 @@
 
 ### [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
 
-# [Wiki Home](https://github.com/ygxqqx/collection/wiki)
+### [Wiki Home](https://github.com/ygxqqx/collection/wiki)
 
 ### &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
