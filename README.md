@@ -60,7 +60,17 @@
 
 ### front end
 
-* []()
+* [进度条颜色渐变](https://github.com/ygxqqx/collection/wiki/Front-End#%E9%9C%80%E6%B1%82-%E8%BF%9B%E5%BA%A6%E6%9D%A1%E9%A2%9C%E8%89%B2%E6%B8%90%E5%8F%98)
+* [父容器利用opacity设置透明后，子元素跟着变透明的解决方案](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%88%B6%E5%AE%B9%E5%99%A8%E5%88%A9%E7%94%A8opacity%E8%AE%BE%E7%BD%AE%E9%80%8F%E6%98%8E%E5%90%8E%E5%AD%90%E5%85%83%E7%B4%A0%E8%B7%9F%E7%9D%80%E5%8F%98%E9%80%8F%E6%98%8E%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
+* [Retina屏的移动设备如何实现真正1px的线？](https://github.com/ygxqqx/collection/wiki/Front-End#retina%E5%B1%8F%E7%9A%84%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A31px%E7%9A%84%E7%BA%BF)
+* [overflow: scroll 在移动端平滑滚动](https://github.com/ygxqqx/collection/wiki/Front-End#overflow-scroll-%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B9%B3%E6%BB%91%E6%BB%9A%E5%8A%A8)
+* [获取Cookie里面的某个字段](https://github.com/ygxqqx/collection/wiki/Front-End#%E8%8E%B7%E5%8F%96cookie%E9%87%8C%E9%9D%A2%E7%9A%84%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5)
+* [设置浏览器Cookie](https://github.com/ygxqqx/collection/wiki/Front-End#%E8%AE%BE%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8cookie)
+* [base64上传图片数据到后台](https://github.com/ygxqqx/collection/wiki/Front-End#base64%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%88%B0%E5%90%8E%E5%8F%B0)
+* [sessionStorage 、localStorage 和 cookie 之间的区别](https://github.com/ygxqqx/collection/wiki/Front-End#sessionstorage-localstorage-%E5%92%8C-cookie-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB)
+* [setTimeout(func ,0)中设置延时为'0'的目的](https://github.com/ygxqqx/collection/wiki/Front-End#settimeoutfunc-0%E4%B8%AD%E8%AE%BE%E7%BD%AE%E5%BB%B6%E6%97%B6%E4%B8%BA0%E7%9A%84%E7%9B%AE%E7%9A%84)
+* [AMD规范](https://github.com/ygxqqx/collection/wiki/Front-End#amd%E8%A7%84%E8%8C%83)
+* [CommonJS模块的特点](https://github.com/ygxqqx/collection/wiki/Front-End#commonjs%E6%A8%A1%E5%9D%97%E7%9A%84%E7%89%B9%E7%82%B9)
 * [XSS和CSRF的区别，如何防御？](https://github.com/ygxqqx/collection/wiki/Front-End#xss%E5%92%8Ccsrf%E7%9A%84%E5%8C%BA%E5%88%AB%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1)
 * [当数组中对象的数据为空时不能提交到后台，也就是提交数据时删除为空的对象。](https://github.com/ygxqqx/collection/wiki/Front-End#%E6%9C%80%E8%BF%91%E6%9C%89%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%8A%9F%E8%83%BD%E5%BD%93%E6%95%B0%E7%BB%84%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%BA%E7%A9%BA%E6%97%B6%E4%B8%8D%E8%83%BD%E6%8F%90%E4%BA%A4%E5%88%B0%E5%90%8E%E5%8F%B0%E4%B9%9F%E5%B0%B1%E6%98%AF%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%E6%97%B6%E5%88%A0%E9%99%A4%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%AF%B9%E8%B1%A1)
 * [ 当关闭页面且数据修改时，需要弹窗提醒用户是否离开页面](https://github.com/ygxqqx/collection/wiki/Front-End#%E6%9C%80%E8%BF%91%E4%BA%A7%E5%93%81%E6%9C%89%E4%B8%80%E4%B8%AA%E9%9C%80%E6%B1%82-%E5%BD%93%E5%85%B3%E9%97%AD%E9%A1%B5%E9%9D%A2%E4%B8%94%E6%95%B0%E6%8D%AE%E4%BF%AE%E6%94%B9%E6%97%B6%E9%9C%80%E8%A6%81%E5%BC%B9%E7%AA%97%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E7%A6%BB%E5%BC%80%E9%A1%B5%E9%9D%A2%E5%BD%93%E6%95%B0%E6%8D%AE%E6%B2%A1%E6%9C%89%E4%BF%AE%E6%94%B9%E6%97%B6%E4%B8%8D%E5%81%9A%E4%BB%BB%E4%BD%95%E6%8F%90%E7%A4%BA)
