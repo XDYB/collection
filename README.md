@@ -1,8 +1,8 @@
 ### [Sort Algorithm](https://github.com/ygxqqx/collection/wiki/Sort-Algorithm)
 
-# [Issues](https://github.com/ygxqqx/collection/issues)
+### [Issues](https://github.com/ygxqqx/collection/issues)
 
-# [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
+### [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
 
 # [Wiki Home](https://github.com/ygxqqx/collection/wiki)
 
