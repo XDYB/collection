@@ -1,10 +1,12 @@
+### [Sort Algorithm](https://github.com/ygxqqx/collection/wiki/Sort-Algorithm)
+
 # [Issues](https://github.com/ygxqqx/collection/issues)
 
 # [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
 
 # [Wiki Home](https://github.com/ygxqqx/collection/wiki)
 
-# &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
+### &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
 
 >     [效果](https://ygxqqx.github.io/collection/jsonp/)  
 
