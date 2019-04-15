@@ -60,6 +60,19 @@
 
 ### front end
 
+* []()
+* [CSS动态效果&&背景颜色渐变](https://github.com/ygxqqx/collection/wiki/Front-End#css%E5%8A%A8%E6%80%81%E6%95%88%E6%9E%9C%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2%E6%B8%90%E5%8F%98%E9%A2%84%E8%A7%88%E5%9C%B0%E5%9D%80)
+* [浏览器地址栏URI自动decode [Link地址](https://github.com/ygxqqx/collection/issues/31)](https://github.com/ygxqqx/collection/wiki/Front-End#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8Furi%E8%87%AA%E5%8A%A8decode-link%E5%9C%B0%E5%9D%80)
+* [页面元素尺寸计算](https://github.com/ygxqqx/collection/wiki/Front-End#%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8%E8%AE%A1%E7%AE%97)
+* [data-* 自定义数据属性的属性](https://github.com/ygxqqx/collection/wiki/Front-End#data--%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7%E7%9A%84%E5%B1%9E%E6%80%A7)
+* [由于活动页用的rem的属性, rem适用于移动端适配, 当用户在PC页面访问页面时, 页面的字体会变得非常大](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%94%B1%E4%BA%8E%E6%B4%BB%E5%8A%A8%E9%A1%B5%E7%94%A8%E7%9A%84rem%E7%9A%84%E5%B1%9E%E6%80%A7-rem%E9%80%82%E7%94%A8%E4%BA%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D-%E5%BD%93%E7%94%A8%E6%88%B7%E5%9C%A8pc%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AE%E9%A1%B5%E9%9D%A2%E6%97%B6-%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%AD%97%E4%BD%93%E4%BC%9A%E5%8F%98%E5%BE%97%E9%9D%9E%E5%B8%B8%E5%A4%A7)
+* [活动页面图片懒加载](https://github.com/ygxqqx/collection/wiki/Front-End#%E6%B4%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD)
+* [CSS3 position fixed水平居中](https://github.com/ygxqqx/collection/wiki/Front-End#css3-position-fixed%E5%B1%85%E4%B8%AD)
+* [相邻div之前有3px间隙](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%9B%B8%E9%82%BBdiv%E4%B9%8B%E5%89%8D%E6%9C%893px%E9%97%B4%E9%9A%99)
+* [背景: 记录一个之前遇到过的一个问答](https://github.com/ygxqqx/collection/wiki/Front-End#%E8%83%8C%E6%99%AF-%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%AA%E4%B9%8B%E5%89%8D%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E7%AD%94)
+* [需求: 当返回到page_02(空白页)用户体验不好](https://github.com/ygxqqx/collection/wiki/Front-End#%E9%9C%80%E6%B1%82-%E5%BD%93%E8%BF%94%E5%9B%9E%E5%88%B0page_02%E7%A9%BA%E7%99%BD%E9%A1%B5%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E4%B8%8D%E5%A5%BD)
+* [解析一个URL地址的信息](https://github.com/ygxqqx/collection/wiki/Front-End#%E8%A7%A3%E6%9E%90%E4%B8%80%E4%B8%AAurl%E5%9C%B0%E5%9D%80%E7%9A%84%E4%BF%A1%E6%81%AF)
+* [居中的一个方法](https://github.com/ygxqqx/collection/wiki/Front-End#%E5%B1%85%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%E6%96%B9%E6%B3%95)
 * [进度条颜色渐变](https://github.com/ygxqqx/collection/wiki/Front-End#%E9%9C%80%E6%B1%82-%E8%BF%9B%E5%BA%A6%E6%9D%A1%E9%A2%9C%E8%89%B2%E6%B8%90%E5%8F%98)
 * [父容器利用opacity设置透明后，子元素跟着变透明的解决方案](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%88%B6%E5%AE%B9%E5%99%A8%E5%88%A9%E7%94%A8opacity%E8%AE%BE%E7%BD%AE%E9%80%8F%E6%98%8E%E5%90%8E%E5%AD%90%E5%85%83%E7%B4%A0%E8%B7%9F%E7%9D%80%E5%8F%98%E9%80%8F%E6%98%8E%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
 * [Retina屏的移动设备如何实现真正1px的线？](https://github.com/ygxqqx/collection/wiki/Front-End#retina%E5%B1%8F%E7%9A%84%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A31px%E7%9A%84%E7%BA%BF)
