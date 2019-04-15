@@ -60,6 +60,11 @@
 
 ### front end
 
+* [去除URL里面的一个param](https://github.com/ygxqqx/collection/wiki/Front-End#%E5%8E%BB%E9%99%A4url%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%80%E4%B8%AAparam)
+* [替换URL里面的一个param](https://github.com/ygxqqx/collection/wiki/Front-End#%E6%9B%BF%E6%8D%A2url%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%80%E4%B8%AAparam)
+* [进制之间的转换](https://github.com/ygxqqx/collection/wiki/Front-End#%E8%BF%9B%E5%88%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2)
+* [突然想到一个需求: 拍平一个数组](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%AA%81%E7%84%B6%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E9%9C%80%E6%B1%82-%E6%8B%8D%E5%B9%B3%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84)
+* [下面这段代码想要循环延时输出结果0 1 2 3 4,请问输出结果是否正确,如果不正确,请说明为什么,并修改循环内的代码使其输出正确结果](https://github.com/ygxqqx/collection/wiki/Front-End#%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E4%BB%A3%E7%A0%81%E6%83%B3%E8%A6%81%E5%BE%AA%E7%8E%AF%E5%BB%B6%E6%97%B6%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C0-1-2-3-4%E8%AF%B7%E9%97%AE%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E5%A6%82%E6%9E%9C%E4%B8%8D%E6%AD%A3%E7%A1%AE%E8%AF%B7%E8%AF%B4%E6%98%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%BE%AA%E7%8E%AF%E5%86%85%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BD%BF%E5%85%B6%E8%BE%93%E5%87%BA%E6%AD%A3%E7%A1%AE%E7%BB%93%E6%9E%9C)
 * [url地址加参数](https://github.com/ygxqqx/collection/wiki/Front-End#url%E5%9C%B0%E5%9D%80%E5%8A%A0%E5%8F%82%E6%95%B0)
 * [电脑时间设置对cookie的影响](https://github.com/ygxqqx/collection/wiki/Front-End#%E7%94%B5%E8%84%91%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE%E5%AF%B9cookie%E7%9A%84%E5%BD%B1%E5%93%8D)
 * [巧用取余](https://github.com/ygxqqx/collection/wiki/Front-End#%E5%B7%A7%E7%94%A8%E5%8F%96%E4%BD%99)
