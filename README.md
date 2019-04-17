@@ -1,3 +1,9 @@
+### new Function
+```js
+var sum = new Function('func', 'func((a, b) => console.log(a + b))');
+sum((cb) => cb(12, 3))
+```
+
 ### [Issues](https://github.com/ygxqqx/collection/issues)
 
 ### [Wiki](https://github.com/ygxqqx/collection/wiki/data-structure-&&-algorithm)
