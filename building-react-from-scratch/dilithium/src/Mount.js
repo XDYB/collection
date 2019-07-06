@@ -26,6 +26,7 @@ function render(element, node) {
   // First check if we've already rendered into this node.
   // If so, we'll be doing an update.
   // Otherwise we'll assume this is an initial render.
+  console.log('rpp=t:', isRoot(node))
   if (isRoot(node)) {
     update(element, node);
   } else {
