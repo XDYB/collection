@@ -1,4 +1,4 @@
-### vue0.60源码分析
+### Vue-0.60源码分析
 
 ### new Function
 ```js
