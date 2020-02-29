@@ -100,3 +100,7 @@ Coming soon...
 ## License
 
 MIT
+
+## 版本git地址记录
+
+https://github.com/vuejs/vue/releases/tag/0.6.0
