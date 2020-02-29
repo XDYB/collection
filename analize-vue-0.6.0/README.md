@@ -103,4 +103,4 @@ MIT
 
 ## 版本git地址记录
 
-https://github.com/vuejs/vue/releases/tag/0.6.0
+https://github.com/vuejs/vue/releases?after=v0.8.1
