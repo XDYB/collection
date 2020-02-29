@@ -8,7 +8,7 @@
 </head>
 <body>
     <script src="../dist/vue.js"></script>
-    <div id="app">
+    <div id="app" v-on="click:changeText">
         <p v-text="hello"></p>
     </div>
     <script>
