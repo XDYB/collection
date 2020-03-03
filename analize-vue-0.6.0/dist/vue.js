@@ -9,7 +9,8 @@
  */
 
 function require(path, parent, orig) {
-  var resolved = require.resolve(path);
+
+  var resolved = require.resolve(path); // path等于vue时, 返回 'vue/src/main.js'
 
   // lookup failed
   if (null == resolved) {
@@ -35,6 +36,11 @@ function require(path, parent, orig) {
     module.call(this, mod.exports, require.relative(resolved), mod);
     delete module._resolving;
     module.exports = mod.exports;
+    if (path === 'vue') {
+      console.log('module:', { module })
+      console.log('require.relative("vue/src/main.js"):', { require: require.relative(resolved) })
+      console.log('mod:', mod)
+    }
   }
 
   return module.exports;
@@ -149,6 +155,9 @@ require.alias = function(from, to) {
 
 require.relative = function(parent) {
   var p = require.normalize(parent, '..');
+  if (parent === 'vue/src/main.js') {
+    // p等于'vue/src'
+  }
 
   /**
    * lastIndexOf helper.
@@ -200,6 +209,7 @@ require.relative = function(parent) {
 
   return localRequire;
 };
+
 require.register("component-emitter/index.js", function(exports, require, module){
 
 /**
@@ -368,12 +378,14 @@ Emitter.prototype.hasListeners = function(event){
 
 });
 require.register("vue/src/main.js", function(exports, require, module){
+  // vue执行的最初入口
 var config      = require('./config'),
     ViewModel   = require('./viewmodel'),
     directives  = require('./directives'),
     filters     = require('./filters'),
     utils       = require('./utils')
-
+console.log('config:', config)
+console.log('config:', JSON.parse(JSON.stringify(config)))
 /**
  *  Set config options
  */
@@ -529,6 +541,7 @@ function setPrefix (attr) {
 }
 
 updatePrefix()
+console.log('main model:', {ViewModel})
 module.exports = ViewModel
 });
 require.register("vue/src/emitter.js", function(exports, require, module){
@@ -807,6 +820,8 @@ function Compiler (vm, options) {
     // copy scope properties to vm
     var scope = options.scope
     if (scope) utils.extend(vm, scope, true)
+    // console.log('vm:', vm)
+    console.log('this:', this)
 
     compiler.vm  = vm
     def(vm, '$', makeHash())
@@ -3169,13 +3184,21 @@ module.exports = {
     }
 }
 });
+
 require.alias("component-emitter/index.js", "vue/deps/emitter/index.js");
 require.alias("component-emitter/index.js", "emitter/index.js");
+require.alias("vue/src/main.js", "vue/index.js");
 
-require.alias("vue/src/main.js", "vue/index.js");if (typeof exports == "object") {
+if (typeof exports == "object") {
   module.exports = require("vue");
 } else if (typeof define == "function" && define.amd) {
-  define(function(){ return require("vue"); });
+  define(function() {
+    return require("vue");
+  });
 } else {
   this["Vue"] = require("vue");
-}})();
+  console.log('require.modules:', require.modules)
+  // console.log('Vue:', this["Vue"])
+}
+window.require = require
+})();

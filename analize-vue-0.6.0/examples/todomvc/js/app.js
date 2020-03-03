@@ -15,6 +15,10 @@ var app = new Vue({
 
     el: '#todoapp',
 
+    attributes: {
+        'data-number': 1
+    },
+
     init: function () {
         this.updateFilter()
         this.remaining = this.todos.filter(function (todo) {
