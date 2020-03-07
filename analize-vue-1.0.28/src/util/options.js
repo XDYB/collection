@@ -140,6 +140,10 @@ strats.activate = function (parentVal, childVal) {
     : parentVal
 }
 
+// strats.beforeCompile = function () {
+//   console.log('=====---99ujjiohhu')
+// }
+
 /**
  * Assets
  *
@@ -155,6 +159,16 @@ function mergeAssets (parentVal, childVal) {
     : res
 }
 
+/**
+ *   _assetTypes: [
+      'component',
+      'directive',
+      'elementDirective',
+      'filter',
+      'transition',
+      'partial'
+    ],
+ */
 config._assetTypes.forEach(function (type) {
   strats[type + 's'] = mergeAssets
 })
@@ -355,6 +369,7 @@ export function mergeOptions (parent, child, vm) {
     }
   }
   function mergeField (key) {
+    // debugger
     var strat = strats[key] || defaultStrat
     options[key] = strat(parent[key], child[key], vm, key)
   }

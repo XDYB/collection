@@ -95,6 +95,10 @@ export default function (Vue) {
     this._data = {}
 
     // call init hook
+    /**
+     * 调用组件里面的init函数
+     * _callHook函数里面会调用this.$emit('hook:init')触发事件
+     */
     this._callHook('init')
 
     // initialize data observation and scope inheritance.
@@ -104,6 +108,10 @@ export default function (Vue) {
     this._initEvents()
 
     // call created hook
+    /**
+     * 调用组件里面的created函数
+     * _callHook函数里面会调用this.$emit('hook:created')触发事件
+     */
     this._callHook('created')
 
     // if `el` option is passed, start compilation.
