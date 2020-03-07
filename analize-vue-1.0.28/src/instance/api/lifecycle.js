@@ -25,13 +25,13 @@ export default function (Vue) {
       el = document.createElement('div')
     }
     this._compile(el)
-    this._initDOMHooks()
-    if (inDoc(this.$el)) {
-      this._callHook('attached')
-      ready.call(this)
-    } else {
-      this.$once('hook:attached', ready)
-    }
+    // this._initDOMHooks()
+    // if (inDoc(this.$el)) {
+    //   this._callHook('attached')
+    //   ready.call(this)
+    // } else {
+    //   this.$once('hook:attached', ready)
+    // }
     return this
   }
 

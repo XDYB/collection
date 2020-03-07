@@ -48,10 +48,15 @@ const DEFAULT_TERMINAL_PRIORITY = 2000
 
 export function compile (el, options, partial) {
   // link function for the node itself.
+  debugger
   var nodeLinkFn = partial || !options._asComponent
     ? compileNode(el, options)
     : null
   // link function for the childNodes
+  /**
+   * TODO: 
+   * 分析compileNodeList代码里面做了哪些工作
+   */
   var childLinkFn =
     !(nodeLinkFn && nodeLinkFn.terminal) &&
     !isScript(el) &&
@@ -312,13 +317,15 @@ export function compileRoot (el, options, contextOptions) {
 
 function compileNode (node, options) {
   var type = node.nodeType
+  var ret
   if (type === 1 && !isScript(node)) {
-    return compileElement(node, options)
+    ret = compileElement(node, options)
   } else if (type === 3 && node.data.trim()) {
-    return compileTextNode(node, options)
+    ret = compileTextNode(node, options)
   } else {
-    return null
+    ret = null
   }
+  return ret
 }
 
 /**

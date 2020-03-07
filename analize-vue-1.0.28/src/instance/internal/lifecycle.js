@@ -56,6 +56,12 @@ export default function (Vue) {
     // on the container node and replacer node.
     var original = el
     el = transclude(el, options)
+
+    /**
+     * 复值
+     * this.$el = el
+     * this.$el.__vue__ = this
+     */
     this._initElement(el)
 
     // handle v-pre on root node (#2026)
@@ -98,7 +104,7 @@ export default function (Vue) {
       // splicing the directives
       contentUnlinkFn(true)
     }
-
+    // debugger
     // finally replace original
     if (options.replace) {
       replace(original, el)
