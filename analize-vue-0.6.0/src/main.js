@@ -157,6 +157,6 @@ function updatePrefix () {
 function setPrefix (attr) {
     config.attrs[attr] = config.prefix + '-' + attr
 }
-
+console.log('===========pppp')
 updatePrefix()
-module.exports = ViewModel
+module.exports = window.Vue = ViewModel
