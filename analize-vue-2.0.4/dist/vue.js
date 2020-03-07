@@ -1,6 +1,6 @@
 /*!
  * Vue.js v2.0.4
- * (c) 2014-2016 Evan You
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -1188,7 +1188,7 @@ function del (obj, key) {
  * we cannot intercept array element access like property getters.
  */
 function dependArray (value) {
-  for (var e = void 0, i = 0, l = value.length; i < l; i++) {
+  for (var e = (void 0), i = 0, l = value.length; i < l; i++) {
     e = value[i];
     e && e.__ob__ && e.__ob__.dep.depend();
     if (Array.isArray(e)) {
@@ -5824,7 +5824,7 @@ function parseHTML (html, options) {
         }
       }
 
-      var text = void 0, rest$1 = void 0;
+      var text = (void 0), rest$1 = (void 0);
       if (textEnd > 0) {
         rest$1 = html.slice(textEnd);
         while (!startTagOpen.test(rest$1) && !endTag.test(rest$1)) {
