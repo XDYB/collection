@@ -64,6 +64,30 @@
 			}
 		},
 
+		init() {
+			console.log('init')
+		},
+
+		created() {
+			console.log('created')
+		},
+
+		beforeCompile() {
+			console.log('beforeCompile')
+		},
+
+		compiled() {
+			console.log('compiled')
+		},
+
+		attached() {
+			console.log('attached')
+		},
+
+		ready() {
+			console.log('ready', this.$els)
+		},
+
 		// methods that implement data logic.
 		// note there's no DOM manipulation here at all.
 		methods: {
@@ -123,4 +147,7 @@
 		}
 	});
 
+	exports.app.$nextTick(function () {
+		console.log('nextTick:')
+	})
 })(window);

@@ -5,11 +5,11 @@ setTimeout(function () {
   // Initial load & render metrics
 
   metrics.afterRenderAsync = now()
-  console.log('Vue load     : ' + (metrics.afterLoad - metrics.beforeLoad).toFixed(2) + 'ms')
-  console.log('Render sync  : ' + (metrics.afterRender - metrics.beforeRender).toFixed(2) + 'ms')
-  console.log('Render async : ' + (metrics.afterRenderAsync - metrics.beforeRender).toFixed(2) + 'ms')
-  console.log('Total sync   : ' + (metrics.afterRender - metrics.beforeLoad).toFixed(2) + 'ms')
-  console.log('Total async  : ' + (metrics.afterRenderAsync - metrics.beforeLoad).toFixed(2) + 'ms')
+  // console.log('Vue load     : ' + (metrics.afterLoad - metrics.beforeLoad).toFixed(2) + 'ms')
+  // console.log('Render sync  : ' + (metrics.afterRender - metrics.beforeRender).toFixed(2) + 'ms')
+  // console.log('Render async : ' + (metrics.afterRenderAsync - metrics.beforeRender).toFixed(2) + 'ms')
+  // console.log('Total sync   : ' + (metrics.afterRender - metrics.beforeLoad).toFixed(2) + 'ms')
+  // console.log('Total async  : ' + (metrics.afterRenderAsync - metrics.beforeLoad).toFixed(2) + 'ms')
 
   // Benchmark
   // add 100 items
