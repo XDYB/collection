@@ -7,17 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="../dist/vue.js"></script>
+    <script src="../dist/_vue.js"></script>
     <div id="app" v-on="click:changeText">
         <p v-text="hello"></p>
+        <p v-on="click:changeName">{{name}}</p>
+        <p v-html="age"></p>
+        <p >{{changeName}}</p>
     </div>
     <script>
         window.$vue = new Vue({
             el: '#app',
+            className: 'aaa',
+            attributes: {
+                'data-index': 3,
+            },
             scope: {
                 hello: 'Hello World!',
+                name: 'luoxupan',
+                age: 28,
+                list: [],
                 changeText: function () {
+                    console.log(this)
                     this.hello = 'Hello VueJS!'
+                },
+                changeName: function(e) {
+                    this.name = 'name 触发事件'
+                    e.stopPropagation() // 阻止事件冒泡
                 }
             }
         })
