@@ -2,61 +2,9 @@
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
-    <script src="./tiny-react.js"></script>
     <title>tiny-reactjs</title>
 </head>
 <body>
-    <div id="root"></div>
-    <div id="content"></div>
-    <div id="container"></div>
 </body>
-    <script type="text/javascript">
-        $(function() {
-            // React.render('hello world', document.getElementById("root"));
-            // React.render(React.createElement('div', {id: 'content'}, ['nihao', '别来无恙']),
-            //     document.getElementById("content"));
-
-            var HelloMessage = React.createClass({
-                getInitialState: function() {
-                    return {type: 'HelloMessage:'};
-                },
-                componentWillMount: function() {
-                    // console.log('我就要开始渲染了。。。')
-                },
-                componentDidMount: function() {
-                    // console.log('我已经渲染好了。。。')
-                    setTimeout(() => this.setState({type: `${this.state.type}:${this.props.name}`}), 1000)
-                },
-                render: function() {
-                    return React.createElement("div", null, this.state.type);
-                }
-            });
-
-            var People = React.createClass({
-                getInitialState: function() {
-                    return {type: 'People:'};
-                },
-                componentWillMount: function() {
-                    // console.log('People我就要开始渲染了。。。')
-                },
-                componentDidMount: function() {
-                    // console.log('People我已经渲染好了。。。')
-                },
-                render: function() {
-                    return React.createElement("div", null, this.state.type, this.props.name);
-                }
-            });
-
-            React.render(React.createElement('div', {class: "John"}, [
-                React.createElement(HelloMessage, {name: "YYYYY"}, [React.createElement(HelloMessage, {name: "Child HelloMessage"})]),
-                React.createElement(HelloMessage, {name: "component"}),
-                React.createElement(People, {name: "component"}),
-                React.createElement('div',{id:'test'},'AAclick me'),
-                React.createElement('div',{id:'two-02'},'这是一个div'),
-                React.createElement('span',{id:'id-span'},'this is a span')
-            ]),
-                document.getElementById("container"));
-        });
-    </script>
+<script src="./dist/main.js"></script>
 </html>

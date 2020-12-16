@@ -1,264 +1,306 @@
-// component类，用来表示文本在渲染，更新，删除时应该做些什么事情
-function ReactDOMTextComponent(text) {
-    // 存下当前的字符串
-    this._currentElement = '' + text;
-    // 用来标识当前component
-    this._rootNodeID = null;
-}
-// component渲染时生成的dom结构
-ReactDOMTextComponent.prototype.mountComponent = function(rootID) {
-    this._rootNodeID = rootID;
-    // return '<span data-reactid="' + rootID + '">' + this._currentElement + '</span>';
-    return this._currentElement;
-}
-
-ReactDOMTextComponent.prototype.receiveComponent = function(nextText) {
-    // TODO:
-}
-
-// ReactElement就是虚拟dom的概念，具有一个type属性代表当前的节点类型，还有节点的属性props
-// 比如对于div这样的节点type就是div，props就是那些attributes
-// 另外这里的key,可以用来标识这个element，用于优化以后的更新，这里可以先不管，知道有这么个东西就好了
-function ReactElement(type, key, props) {
-    this.type = type;
-    this.key = key;
-    this.props = props;
-}
-
-// component类，用来表示文本在渲染，更新，删除时应该做些什么事情
-function ReactDOMComponent(element) {
-    // 存下当前的element对象引用
-    this._currentElement = element;
-    this._rootNodeID = null;
-}
-// component渲染时生成的dom结构
-ReactDOMComponent.prototype.mountComponent = function(rootID) {
-    // 赋值标识
-    this._rootNodeID = rootID;
-    let props = this._currentElement.props;
-    let tagOpen = `<${this._currentElement.type} data-reactid=${rootID}`;
-    let tagClose = `</${this._currentElement.type}>`;
-    // 拼凑出属性
-    for (let propKey in props) {
-        // 这里要做一下事件的监听，就是从属性props里面解析拿出on开头的事件属性的对应事件监听
-        if (/^on[A-Za-z]/.test(propKey)) {
-            let eventType = propKey.replace('on', '');
-            // 针对当前的节点添加事件代理,以_rootNodeID为命名空间
-            $(document).delegate('[data-reactid="' + this._rootNodeID + '"]', eventType + '.' + this._rootNodeID, props[propKey]);
-        }
-        // 对于children属性以及事件监听的属性不需要进行字符串拼接
-        // 事件会代理到全局。这边不能拼到dom上不然会产生原生的事件监听
-        if (!/^on[A-Za-z]/.test(propKey) && propKey !== 'children' && props[propKey]) {
-            tagOpen += ' ' + propKey + '=' + props[propKey];
-        }
-    }
-    // 获取子节点渲染出的内容
-    let content = '';
-    let children = props.children || [];
-    let childrenInstances = []; // 用于保存所有的子节点的componet实例，以后会用到
-    children.forEach((child, key) => {
-        // 这里再次调用了instantiateReactComponent实例化子节点component类，拼接好返回
-        let childComponentInstance = instantiateReactComponent(child);
-        childComponentInstance._mountIndex = key;
-        childrenInstances.push(childComponentInstance);
-        // 子节点的rootId是父节点的rootId加上新的key也就是顺序的值拼成的新值
-        let curRootId = `${this._rootNodeID}.${key}`;
-        // 得到子节点的渲染内容
-        let childMarkup = childComponentInstance.mountComponent(curRootId);
-        // 拼接在一起
-        content += ' ' + childMarkup;
-    });
-    // 留给以后更新时用的这边先不用管
-    this._renderedChildren = childrenInstances;
-    // 拼出整个html内容
-    return `${tagOpen}>${content}${tagClose}`;
-}
-
-// 定义ReactClass类,所有自定义的超级父类
-var ReactClass = function() {
-}
-// 留给子类去继承覆盖
-ReactClass.prototype.render = function() {}
-// setState
-ReactClass.prototype.setState = function(newState) {
-    // 还记得我们在ReactCompositeComponent里面mount的时候 做了赋值
-    // 所以这里可以拿到 对应的ReactCompositeComponent的实例_reactInternalInstance
-    this._reactInternalInstance.receiveComponent(null, newState);
-}
-
-function ReactCompositeComponent(element) {
-    // 存放元素element对象
-    this._currentElement = element;
-    // 存放唯一标识
-    this._rootNodeID = null;
-    // 存放对应的ReactClass的实例
-    this._instance = null;
-}
-// 用于返回当前自定义元素渲染时应该返回的内容
-ReactCompositeComponent.prototype.mountComponent = function(rootID) {
-    this._rootNodeID = rootID;
-    // 拿到当前元素对应的属性值
-    let publicProps = this._currentElement.props;
-    // 拿到对应的ReactClass
-    let ReactClass = this._currentElement.type;
-    // Initialize the public class
-    let inst = new ReactClass(publicProps);
-    this._instance = inst;
-    // 保留对当前comonent的引用，下面更新会用到
-    inst._reactInternalInstance = this;
-    if (inst.componentWillMount) {
-        inst.componentWillMount();
-        // 这里在原始的reactjs其实还有一层处理，就是  componentWillMount调用setstate，
-        // 不会触发rerender而是自动提前合并，这里为了保持简单，就略去了
-    }
-    // 调用ReactClass的实例的render方法,返回一个element或者一个文本节点
-    let renderedElement = this._instance.render();
-    // 得到renderedElement对应的component类实例
-    let renderedComponentInstance = instantiateReactComponent(renderedElement);
-    // this._renderedComponent = renderedComponentInstance; // 存起来留作后用
-    this._renderedComponent = this; // 存起来留作后用
-    // 拿到渲染之后的字符串内容，将当前的_rootNodeID传给render出的节点
-    let renderedMarkup = renderedComponentInstance.mountComponent(this._rootNodeID);
-
-    let children = publicProps.children || [];
-    children.forEach((item, index) => renderedMarkup += instantiateReactComponent(item).mountComponent(`${this._rootNodeID}.${index}`));
-
-    // 之前我们在React.render方法最后触发了mountReady事件，所以这里可以监听，在渲染完成后会触发。
-    $(document).on('mountReady', function() {
-        // 调用inst.componentDidMount
-        inst.componentDidMount && inst.componentDidMount();
-    });
-    let ret = renderedMarkup;
-    if (children.length > 0) {
-        ret = `<div>${renderedMarkup}</div>`;
-    }
-    return ret;
-}
-// 更新
-ReactCompositeComponent.prototype.receiveComponent = function(nextElement, newState) {
-    // 如果接受了新的，就使用最新的element
-    this._currentElement = nextElement || this._currentElement;
-    let inst = this._instance;
-    // 合并state
-    let nextState = Object.assign(inst.state, newState);
-    let nextProps = this._currentElement.props;
-
-    // 改写state
-    inst.state = nextState;
-    inst.props = nextProps;
-    // 如果inst有shouldComponentUpdate并且返回false。说明组件本身判断不要更新，就直接返回。
-    if (inst.shouldComponentUpdate && (inst.shouldComponentUpdate(nextProps, nextState) === false)) {
-        return ;
-    }
-    // 生命周期管理，如果有componentWillUpdate，就调用，表示开始要更新了。
-    if (inst.componentWillUpdat) {
-        inst.componentWillUpdat(nextProps, nextState);
-    }
-    let prevComponentInstance = this._renderedComponent;
-    let prevRenderedElement = prevComponentInstance._currentElement;
-    // 重新执行render拿到对应的新element;
-    let nextRenderedElement = this._instance.render();
-    // 判断是需要更新还是直接就重新渲染
-    // 注意这里的_shouldUpdateReactComponent跟上面的不同哦 这个是全局的方法
-    if (_shouldUpdateReactComponent(prevRenderedElement, nextRenderedElement)) {
-        // 如果需要更新，就继续调用子节点的receiveComponent的方法，传入新的element更新子节点。
-        prevComponentInstance.receiveComponent(nextRenderedElement);
-        // 用componentDidUpdate表示更新完成了
-        inst.componentDidUpdate && inst.componentDidUpdate();
-    } else {
-        // 如果发现完全是不同的两种element，那就干脆重新渲染了
-        let thisID = this._rootNodeID;
-        // this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
-        this._renderedComponent = instantiateReactComponent(nextRenderedElement);
-        // 重新生成对应的元素内容
-        let nextMarkup = this._renderedComponent.mountComponent(thisID);
-        // 替换整个节点
-        $('[data-reactid="' + this._rootNodeID + '"]').replaceWith(nextMarkup);
-    }
-}
-
-// 用来判定两个element需不需要更新
-// 这里的key是我们createElement的时候可以选择性的传入的。用来标识这个element，当发现key不同时，我们就可以直接重新渲染，不需要去更新了。
-let _shouldUpdateReactComponent = function(prevElement, nextElement) {
-    if (prevElement != null && nextElement != null) {
-        let prevType = typeof prevElement;
-        let nextType = typeof nextElement;
-        if (prevType === 'string' || prevType === 'number') {
-            return nextType === 'string' || nextType === 'number';
-        } else {
-            return nextType === 'object' && prevElement.type === nextElement.type && prevElement.key === nextElement.key;
-        }
-    }
-    return false;
-}
-
-// component工厂  用来返回一个component实例
-function instantiateReactComponent(node) {
-    if (typeof node === 'string' || typeof node === 'number') {
-        return new ReactDOMTextComponent(node);
-    }
-    // 浏览器默认节点的情况
-    if (typeof node === 'object' && typeof node.type === 'string') {
-        // 注意这里，使用了一种新的component
-        // React.render(React.createElement('div', {id: 'content'}, ['nihao', '别来无恙']),
-        //     document.getElementById("content"));
-        return new ReactDOMComponent(node);
-    }
-    // 自定义的元素节点
-    if (typeof node === 'object' && typeof node.type === 'function') {
-        // 注意这里，使用新的component,专门针对自定义元素
-        return new ReactCompositeComponent(node);
-    }
-}
-
-React = {
-    nextReactRootIndex: 1,
-    createElement: function(type, config, children) {
-        let props = {};
-        config = config || {};
-        // 看有没有key，用来标识element的类型，方便以后高效的更新，这里可以先不管
-        let key = config.key || null;
-        // 复制config里的内容到props
-        for (let propName in config) {
-            if (config.hasOwnProperty(propName) && propName !== 'key') {
-                props[propName] = config[propName];
-            }
-        }
-        // 处理children,全部挂载到props的children属性上
-        // 支持两种写法，如果只有一个参数，直接赋值给children，否则做合并处理
-        let childrenLength = arguments.length - 2;
-        if (childrenLength === 1) {
-            props.children = Array.isArray(children) ? children : [children];
-        } else if (childrenLength > 1) {
-            let childArray = [];
-            let array = Array.prototype.slice.call(arguments, 2);
-            // array.forEach((currentValue, index) => childArray.push(currentValue));
-            // props.children = childArray;
-            props.children = array;
-        }
-        return new ReactElement(type, key, props);
+function createElement(type, props, ...children) {
+  return {
+    type,
+    props: {
+      ...props,
+      children: children.map(child =>
+        typeof child === "object"
+          ? child
+          : createTextElement(child)
+      ),
     },
-    createClass: function(spec) {
-        // 生成一个子类
-        let Constructor = function(props) {
-            this.props = props;
-            this.state = this.getInitialState ? this.getInitialState() : null;
-        }
-        // 原型继承，继承超级父类
-        Constructor.prototype = new ReactClass();
-        Constructor.prototype.constructor = Constructor;
-        // 混入spec到原型
-        Object.assign(Constructor.prototype, spec);
-        return Constructor;
-    },
-    render: function(element, container) {
-        let componentInstance = instantiateReactComponent(element);
-        let markup = componentInstance.mountComponent(React.nextReactRootIndex++);
-        $(container).html(markup);
-        // 触发完成mount的事件
-        $(document).trigger('mountReady');
-    }
+  }
 }
 
+function createTextElement(text) {
+  return {
+    type: "TEXT_ELEMENT",
+    props: {
+      nodeValue: text,
+      children: [],
+    },
+  }
+}
 
+function createDom(fiber) {
+  const dom =
+    fiber.type == "TEXT_ELEMENT"
+      ? document.createTextNode("")
+      : document.createElement(fiber.type)
 
+  updateDom(dom, {}, fiber.props)
+
+  return dom
+}
+
+const isEvent = key => key.startsWith("on")
+const isProperty = key =>
+  key !== "children" && !isEvent(key)
+const isNew = (prev, next) => key =>
+  prev[key] !== next[key]
+const isGone = (prev, next) => key => !(key in next)
+function updateDom(dom, prevProps, nextProps) {
+  //Remove old or changed event listeners
+  Object.keys(prevProps)
+    .filter(isEvent)
+    .filter(
+      key =>
+        !(key in nextProps) ||
+        isNew(prevProps, nextProps)(key)
+    )
+    .forEach(name => {
+      const eventType = name
+        .toLowerCase()
+        .substring(2)
+      dom.removeEventListener(
+        eventType,
+        prevProps[name]
+      )
+    })
+
+  // Remove old properties
+  Object.keys(prevProps)
+    .filter(isProperty)
+    .filter(isGone(prevProps, nextProps))
+    .forEach(name => {
+      dom[name] = ""
+    })
+
+  // Set new or changed properties
+  Object.keys(nextProps)
+    .filter(isProperty)
+    .filter(isNew(prevProps, nextProps))
+    .forEach(name => {
+      dom[name] = nextProps[name]
+    })
+
+  // Add event listeners
+  Object.keys(nextProps)
+    .filter(isEvent)
+    .filter(isNew(prevProps, nextProps))
+    .forEach(name => {
+      const eventType = name
+        .toLowerCase()
+        .substring(2)
+      dom.addEventListener(
+        eventType,
+        nextProps[name]
+      )
+    })
+}
+
+function commitRoot() {
+  deletions.forEach(commitWork)
+  commitWork(wipRoot.child)
+  currentRoot = wipRoot
+  wipRoot = null
+}
+
+function commitWork(fiber) {
+  if (!fiber) {
+    return
+  }
+
+  let domParentFiber = fiber.parent
+  while (!domParentFiber.dom) {
+    domParentFiber = domParentFiber.parent
+  }
+  const domParent = domParentFiber.dom
+
+  if (
+    fiber.effectTag === "PLACEMENT" &&
+    fiber.dom != null
+  ) {
+    domParent.appendChild(fiber.dom)
+  } else if (
+    fiber.effectTag === "UPDATE" &&
+    fiber.dom != null
+  ) {
+    updateDom(
+      fiber.dom,
+      fiber.alternate.props,
+      fiber.props
+    )
+  } else if (fiber.effectTag === "DELETION") {
+    commitDeletion(fiber, domParent)
+  }
+
+  commitWork(fiber.child)
+  commitWork(fiber.sibling)
+}
+
+function commitDeletion(fiber, domParent) {
+  if (fiber.dom) {
+    domParent.removeChild(fiber.dom)
+  } else {
+    commitDeletion(fiber.child, domParent)
+  }
+}
+
+function render(element, container) {
+  wipRoot = {
+    dom: container,
+    props: {
+      children: [element],
+    },
+    alternate: currentRoot,
+  }
+  deletions = []
+  nextUnitOfWork = wipRoot
+}
+
+let nextUnitOfWork = null
+let currentRoot = null
+let wipRoot = null
+let deletions = null
+
+function workLoop(deadline) {
+  let shouldYield = false
+  while (nextUnitOfWork && !shouldYield) {
+    nextUnitOfWork = performUnitOfWork(
+      nextUnitOfWork
+    )
+    shouldYield = deadline.timeRemaining() < 1
+  }
+
+  if (!nextUnitOfWork && wipRoot) {
+    commitRoot()
+  }
+
+  requestIdleCallback(workLoop)
+}
+
+requestIdleCallback(workLoop)
+
+function performUnitOfWork(fiber) {
+  const isFunctionComponent =
+    fiber.type instanceof Function
+  if (isFunctionComponent) {
+    updateFunctionComponent(fiber)
+  } else {
+    updateHostComponent(fiber)
+  }
+  if (fiber.child) {
+    return fiber.child
+  }
+  let nextFiber = fiber
+  while (nextFiber) {
+    if (nextFiber.sibling) {
+      return nextFiber.sibling
+    }
+    nextFiber = nextFiber.parent
+  }
+}
+
+let wipFiber = null
+let hookIndex = null
+
+function updateFunctionComponent(fiber) {
+  wipFiber = fiber
+  hookIndex = 0
+  wipFiber.hooks = []
+  const children = [fiber.type(fiber.props)]
+  reconcileChildren(fiber, children)
+}
+
+function useState(initial) {
+  const oldHook =
+    wipFiber.alternate &&
+    wipFiber.alternate.hooks &&
+    wipFiber.alternate.hooks[hookIndex]
+  const hook = {
+    state: oldHook ? oldHook.state : initial,
+    queue: [],
+  }
+
+  const actions = oldHook ? oldHook.queue : []
+  actions.forEach(action => {
+    hook.state = action(hook.state)
+  })
+
+  const setState = action => {
+    hook.queue.push(action)
+    wipRoot = {
+      dom: currentRoot.dom,
+      props: currentRoot.props,
+      alternate: currentRoot,
+    }
+    nextUnitOfWork = wipRoot
+    deletions = []
+  }
+
+  wipFiber.hooks.push(hook)
+  hookIndex++
+  return [hook.state, setState]
+}
+
+function updateHostComponent(fiber) {
+  if (!fiber.dom) {
+    fiber.dom = createDom(fiber)
+  }
+  reconcileChildren(fiber, fiber.props.children)
+}
+
+function reconcileChildren(wipFiber, elements) {
+  let index = 0
+  let oldFiber =
+    wipFiber.alternate && wipFiber.alternate.child
+  let prevSibling = null
+
+  while (
+    index < elements.length ||
+    oldFiber != null
+  ) {
+    const element = elements[index]
+    let newFiber = null
+
+    const sameType =
+      oldFiber &&
+      element &&
+      element.type == oldFiber.type
+
+    if (sameType) {
+      newFiber = {
+        type: oldFiber.type,
+        props: element.props,
+        dom: oldFiber.dom,
+        parent: wipFiber,
+        alternate: oldFiber,
+        effectTag: "UPDATE",
+      }
+    }
+    if (element && !sameType) {
+      newFiber = {
+        type: element.type,
+        props: element.props,
+        dom: null,
+        parent: wipFiber,
+        alternate: null,
+        effectTag: "PLACEMENT",
+      }
+    }
+    if (oldFiber && !sameType) {
+      oldFiber.effectTag = "DELETION"
+      deletions.push(oldFiber)
+    }
+
+    if (oldFiber) {
+      oldFiber = oldFiber.sibling
+    }
+
+    if (index === 0) {
+      wipFiber.child = newFiber
+    } else if (element) {
+      prevSibling.sibling = newFiber
+    }
+
+    prevSibling = newFiber
+    index++
+  }
+}
+
+export const TinyReact = {
+  createElement,
+  render,
+  useState,
+}
