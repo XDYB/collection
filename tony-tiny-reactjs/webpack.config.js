@@ -13,7 +13,7 @@ module.exports = {
             plugins: [[
               '@babel/plugin-transform-react-jsx',
               {
-                pragma: 'ToyReact.createElement' // 自己定义名字,用来修改 webpack 后,编译的 js 中,创建的一个方法名
+                pragma: 'TinyReact.createElement' // 自己定义名字,用来修改 webpack 后,编译的 js 中,创建的一个方法名
               }
             ]]
           }
