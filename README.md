@@ -28,6 +28,8 @@ sum((cb) => cb(12, 3))
 # &sect; [闭包](https://zhuanlan.zhihu.com/p/22486908?refer=study-fe)
 
 > 「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
+
+> [闭包的优点] 保存作用域，隔离环境
     
 ``` js
 var local = "变量";
