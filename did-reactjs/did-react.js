@@ -41,6 +41,7 @@ function createDom(fiber) {
 function commitRoot() {
   // TODO add nodes to dom
   commitWork(wipRoot.child)
+  currentRoot = wipRoot
   wipRoot = null
 }
 
@@ -55,16 +56,29 @@ function commitWork(fiber) {
 }
 
 function render(element, container) {
+  /**
+   * We also add the alternate property to every fiber.
+   * This property is a link to the old fiber,
+   * the fiber that we committed to the DOM in the previous commit phase.
+   */
   wipRoot = {
     dom: container,
     props: {
       children: [element],
     },
+    alternate: currentRoot,
   }
   nextUnitOfWork = wipRoot
 }
 
+/**
+ * So we need to save a reference to that 
+ * “last fiber tree we committed to the DOM” 
+ * after we finish the commit. We call it currentRoot.
+ */
+
 let nextUnitOfWork = null;
+let currentRoot = null
 let wipRoot = null;
 
 function workLoop(deadline) {
@@ -86,7 +100,7 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
-  // TODO: add dom node
+  // add dom node
   if (!fiber.dom) {
     fiber.dom = createDom(fiber)
   }
@@ -94,32 +108,11 @@ function performUnitOfWork(fiber) {
   //   fiber.parent.dom.appendChild(fiber.dom)
   // }
 
-  // TODO: create new fibers
+  // create new fibers
   const elements = fiber.props.children
-  let index = 0
-  let prevSibling = null
-
-  while (index < elements.length) {
-    const element = elements[index]
-
-    const newFiber = {
-      type: element.type,
-      props: element.props,
-      parent: fiber,
-      dom: null,
-    }
-
-    if (index === 0) {
-      fiber.child = newFiber
-    } else {
-      prevSibling.sibling = newFiber
-    }
-
-    prevSibling = newFiber
-    index++
-  }
+  reconcileChildren(fiber, elements)
   
-  // TODO: return next unit of work
+  // return next unit of work
   if (fiber.child) {
     return fiber.child
   }
@@ -129,6 +122,31 @@ function performUnitOfWork(fiber) {
       return nextFiber.sibling
     }
     nextFiber = nextFiber.parent
+  }
+}
+
+function reconcileChildren(wipFiber, elements) {
+  let index = 0
+  let prevSibling = null
+
+  while (index < elements.length) {
+    const element = elements[index]
+
+    const newFiber = {
+      type: element.type,
+      props: element.props,
+      parent: wipFiber,
+      dom: null,
+    }
+
+    if (index === 0) {
+      wipFiber.child = newFiber
+    } else {
+      prevSibling.sibling = newFiber
+    }
+
+    prevSibling = newFiber
+    index++
   }
 }
 
