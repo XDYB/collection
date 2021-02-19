@@ -25,6 +25,7 @@ const element = (
   <div id="foo">
     <a>bar</a>
     <b />
+    <div>你就不能就</div>
   </div>
 )
 
