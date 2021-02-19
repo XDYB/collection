@@ -23,10 +23,15 @@ import { Didact } from './did-react'
 
 
 /** @jsx Didact.createElement */
-function App(props) {
+function Counter(props) {
+  const [state, setState] = Didact.useState(1)
   return (
     <div>
-      <h1>Hi {props.name}</h1>
+      <h1 onClick={() => {
+        setState(c => c + 1)
+      }}>
+        Hi {props.name} Count: {state}
+      </h1>
       <div>文本文案</div>
     </div>
   )
@@ -34,7 +39,7 @@ function App(props) {
 
 const element = (
   <div id="foo">
-    <App name="foo" />
+    <Counter name="foo" />
     <a>bar</a>
     <b />
     <div>你就不能就</div>
