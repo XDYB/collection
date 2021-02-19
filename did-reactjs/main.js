@@ -19,7 +19,7 @@ function Counter(props) {
 function Random() {
   const [state, setState] = Didact.useState(1)
   return (
-    <div style="font-size: xx-large;" onClick={() => {
+    <div style="cursor: pointer;font-size: xx-large;" onClick={() => {
       setState(c => c + 1)
     }}>
       {state}
