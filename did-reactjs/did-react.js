@@ -93,6 +93,7 @@ function commitRoot() {
   // add nodes to dom
   commitWork(wipRoot.child)
   currentRoot = wipRoot
+  console.log('currentRoot:', currentRoot)
   wipRoot = null
 }
 

@@ -10,7 +10,19 @@ function Counter(props) {
       }}>
         Hi {props.name} Count: {state}
       </h1>
+      <Random />
       <div>文本文案</div>
+    </div>
+  )
+}
+
+function Random() {
+  const [state, setState] = Didact.useState(1)
+  return (
+    <div style="font-size: xx-large;" onClick={() => {
+      setState(c => c + 1)
+    }}>
+      {state}
     </div>
   )
 }
