@@ -173,9 +173,7 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
-  const isFunctionComponent = fiber.type instanceof Function
-
-  if (isFunctionComponent) {
+  if (fiber.type instanceof Function) {
     updateFunctionComponent(fiber)
   } else {
     updateHostComponent(fiber)
