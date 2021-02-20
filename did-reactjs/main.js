@@ -6,7 +6,7 @@ function Counter(props) {
   return (
     <div>
       <h1 onClick={() => {
-        setState(c => c + 1)
+        setState(state + 1)
       }}>
         Hi {props.name} Count: {state}
       </h1>
