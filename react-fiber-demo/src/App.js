@@ -5,7 +5,10 @@ function Example() {
   // 声明一个叫 "count" 的 state 变量
   const [count, setCount] = useState(0);
   const [state, setState] = useState(1);
-  const ret = (
+
+  // debugger
+  
+  return (
     <div className='example'>
       <button style={{ display: 'block', cursor: 'pointer' }} onClick={() => setCount((count) => count + 1)}>
         Click me {count}
@@ -15,13 +18,10 @@ function Example() {
       </button>
     </div>
   );
-  // debugger
-  console.log(ret)
-  return ret;
 }
 
 function App() {
-  return (
+  const ret = (
     <div className="">
       <Example />
       <header className="">
@@ -33,7 +33,9 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
+  console.log(ret)
+  return ret;
 }
 
 export default App;
