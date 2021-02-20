@@ -5,7 +5,7 @@ function Counter(props) {
   const [state, setState] = Didact.useState(1)
   return (
     <div>
-      <h1 onClick={() => {
+      <h1  style="cursor: pointer;" onClick={() => {
         setState(state + 1)
       }}>
         Hi {props.name} Count: {state}
