@@ -241,6 +241,20 @@ function updateHostComponent(fiber) {
   if (!fiber.dom) {
     fiber.dom = createDom(fiber)
   }
+
+  if (fiber.props.children) {
+    // 当数组里面还有数组的话 拍平
+    var _children = [];
+    fiber.props.children.forEach((item) => {
+      if (Array.isArray(item)) {
+        _children = _children.concat(item)
+      } else {
+        _children.push(item)
+      }
+    })
+    fiber.props.children = _children;
+  }
+
   // create new fibers
   reconcileChildren(fiber, fiber.props.children)
 }

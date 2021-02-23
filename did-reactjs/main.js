@@ -4,12 +4,15 @@ import { Didact } from './did-react'
 function Counter(props) {
   const [state, setState] = Didact.useState(1)
   return (
-    <div>
+    <div id='Counter-div'>
       <h1  style="cursor: pointer;" onClick={() => {
         setState(state + 1)
       }}>
         Hi {props.name} Count: {state}
       </h1>
+      <div>
+        {new Array(state).fill('').map((item, idx) => <span>{idx} </span>)}
+      </div>
       <Random />
       <div>文本文案</div>
     </div>
