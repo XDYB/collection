@@ -15,6 +15,7 @@
   3. 再把组件库接入页面模板（模板包含基础库等一些各个端的基础能力）
   4. 页面以npm包的形式接入小程序
   5. npm包里面的代码不经过压缩处理，小程序打包统一处理
+
 4. 资源选择器做成前端SDK的形式供第三方使用、屏蔽前端技术栈使得使用方接入成本降低
   1. 通过iframe方式提供服务，通过postMessage传递数据
   2. 封装成npm包的形式给用户使用，用户只需调用封装好的函数即可
@@ -25,3 +26,38 @@
   2. 每接收一个需求都需要仔细评估，充分沟通，提前预知风险点（接手需求同时需要在项目里面看代码熟悉业务）
   3. 每做一个需求都尽可能梳理出涉及到的业务逻辑，在梳理的同时加深了对老旧业务的认知，发现并避免风险
 
+
+项目:  小米.H5编辑器
+1. 优化搭建页面时、页面的模块数据结构、使数据结构更合理
+2. 页面存在多个相同模块时、通过合并相同的模块网络请求、优化性能
+  ```js
+    let timeouter = null; let queueGid = [];
+    function fetchGoodsInfoByGid(gid, func = function() {}) {
+      if (timeouter) clearTimeout(timeouter);
+      queueGid.push({ gid, func });
+      timeouter = setTimeout(fetch, 10);
+    }
+    function fetch() {
+      if (queueGid.length == 0) return;
+      let queue = queueGid.slice(0);
+      queueGid.length = 0;
+
+      let params = { model: "Product", action: "GetDetailLite", parameters: {} };
+      params.parameters.gid = queue.map(({ gid }) => gid);
+      miFetch2({
+        data: { info: params },
+        success: (result) => {
+          let map = result.info.data;
+          queue.forEach(({ gid, func }) => map[gid] && func(map[gid]));
+        },
+        error: (e) => toast("获取商品信息失败"),
+        url: '/app/shopv3/pipe',
+        skipLogin: true
+      });
+    }
+  ```
+3. 活动页面的图片全部懒加载、解决活动页面承载内容过多导致页面过慢问题
+4. 倒计时模块时间校准、解决js执行阻塞导致时间不准
+5. 参与优化模块开发流程提高开发效率
+6. 导出页面时、将动态数据打包到html文件、提高页面加载速度、提升用户体验
+7. 每个模块都有schema数据结构、模块支持可编辑、用数据结构方式解决用户编辑模块存储数据问题
