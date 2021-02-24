@@ -28,6 +28,42 @@
 
 
 项目:  小米.H5编辑器
+
+0. 编辑器数据结构
+```js
+{
+  createdAt: "2020-06-30T03:49:03.000Z",
+  updatedAt: "2020-07-20T11:25:58.000Z",
+  onlineUrl: "",
+  note: "拷贝自服务之心模板",
+  creator: "luoxupan",
+  global: {
+    canShare: false,
+    share: { }, // 分享数据
+  },
+  scenes: {
+    lang: "",
+    eventTable: { }, // 页面事件
+    style: { }, // 页面样式
+    updatedAt: "2020-07-20T11:25:58.000Z",
+    layers: [
+      {
+        editorStatus: { active: false, isLock: false, show: true },
+        id: "widget-SP-wkTFGj", // 组件的div标签id
+        id_name: "二维码",
+        key: "ContentImage",
+        label: "",
+        name: "内容图",
+        props: { }, // 用户编辑的动态数据
+        style: { }, // 组件样式
+        type: "ContentImage", // 指定哪个组件
+        children: []
+      }
+    ]
+  }
+  
+}
+```
 1. 优化搭建页面时页面的模块数据结构、使数据结构更合理
 2. 页面存在多个相同模块时、通过合并相同的模块网络请求、优化性能
   ```js
