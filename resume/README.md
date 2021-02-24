@@ -117,3 +117,5 @@
   1. 图片强缓存（memory + disk image caching）
   2. 渐进式图像加载、图片预加载
 
+
+content-encoding: gzip
