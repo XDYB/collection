@@ -110,5 +110,10 @@
 小米.有品React Native项目
 
 2. 参与产品站重构时用SectionList优化大列表性能
+  1. 就像微信盆友圈列表，每个状态有头像、名字、内容框、品论点赞框等。
+  2. SectionList基于VirtualizedList的封装实现，当滑出屏幕的卡片可以被复用，达到节省开销的目的
 
 3. 由于电商业务图片多占用内存过大、用FastImage优化内存占用过大问题
+  1. 图片强缓存（memory + disk image caching）
+  2. 渐进式图像加载、图片预加载
+
