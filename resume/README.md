@@ -23,6 +23,71 @@
   3. 封装成npm包里面的代码包含资源iframe弹出框和数据处理逻辑
 
 
+项目: 表单字段搭建系统
+
+> 数据结构
+
+```js
+[
+  {
+    type: 'select', // array, object, input, radio, select, textarea ...
+    name: 'filed_name', // 字段名字
+    label: '字段名字',
+    label_en: '字段名字',
+    required: true,
+    dataSource: {
+      type: '',
+      enum: [],
+      dictUrl: '',
+    },
+    items: []
+  },
+  {
+    type: 'array',
+    name: 'filed_name',
+    label: '字段名字',
+    label_en: '字段名字',
+    required: true,
+    items: [
+      {
+        type: 'input',
+        name: 'filed_name',
+        label: '字段名字',
+        label_en: '字段名字',
+        required: true,
+        items: [
+          {
+            type: 'input',
+            name: 'filed_name',
+            label: '字段名字',
+            label_en: '字段名字',
+            required: true,
+            items: []
+          },
+        ]
+      },
+    ]
+  },
+  {
+    type: 'object',
+    name: 'filed_name',
+    label: '字段名字',
+    label_en: '字段名字',
+    required: true,
+    items: [
+      {
+        type: 'input',
+        name: 'filed_name',
+        label: '字段名字',
+        label_en: '字段名字',
+        required: true,
+        items: []
+      },
+    ]
+  },
+]
+```
+
 项目:  小米.H5编辑器
 
 0. 编辑器数据结构
