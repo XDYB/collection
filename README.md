@@ -1,9 +1,4 @@
 
-### new Function
-```js
-var sum = new Function('func', 'func((a, b) => console.log(a + b))');
-sum((cb) => cb(12, 3))
-```
 
 ### &sect; [jsonp](https://zhuanlan.zhihu.com/p/22600501?refer=study-fe)
         
@@ -146,27 +141,4 @@ for (var x in a){
    foo
 */
 ```
-----
 
-# &sect; arguments 转化为数组
-
-### 使用Array的slice方法
-
-``` js
-Array.prototype.slice.call(arguments);
-```
-----
-# ⊙ JavaScript 判断是否为数组
-```js
-function isArray(value){
-  if (typeof Array.isArray === 'function') {
-    return Array.isArray(value); 
-  } else {
-    return Object.prototype.toString.call(value) === '[object Array]'; 
-  }
-}
-```
-
-记住“visibility:hidden”和“display：none”之间的不同，“visibility:hidden”将元素设置为不可见，但是同样在布局上占领一定空间（例如，它会被渲染成为空盒子），但是“display:none”的元素是将节点从整个render tree中移除，所以不是布局中的一部分 
-
-## this都是指向实例化对象
