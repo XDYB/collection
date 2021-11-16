@@ -30,8 +30,8 @@ module.exports = {
                   // 配置信息
                   {
                     targets: {
-                      "chrome": "58", // 要兼容目标的浏览器
-                      "ie": "11"
+                      "chrome": "35", // 要兼容目标的浏览器
+                      // "ie": "11"
                     },
                     "corejs": "3", // 指定corejs的版本
                     "useBuiltIns": "usage", // 使用corejs的方式 "usage" 表示按需加载
