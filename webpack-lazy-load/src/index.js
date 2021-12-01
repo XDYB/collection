@@ -1,19 +1,19 @@
 function component() {
   const element = document.createElement('div');
-  const button = document.createElement('button');
-  const br = document.createElement('br');
+  element.innerHTML = 'Hello webpack';
 
-  button.innerHTML = 'Click me and look at the console!';
-  element.innerHTML = ['Hello', 'webpack'].join('');
-  element.appendChild(br);
+  const button = document.createElement('button');
+  button.innerHTML = 'Click me load!';
+  
+  element.appendChild(document.createElement('br'));
   element.appendChild(button);
 
   // Note that because a network request is involved, some indication
   // of loading would need to be shown in a production-level site/app.
   button.addEventListener('click', () => {
     import(/* webpackChunkName: "async" */ './async').then((module) => {
-      const print = module.getInfo;
-      print('onclick:');
+      module.getInfo('onclick:');
+      module.Button(element);
     });
   });
 
