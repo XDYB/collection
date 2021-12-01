@@ -9,7 +9,7 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name]_[hash:8].js',
     environment: {
       arrowFunction: false, // webpack拼装的代码不要箭头函数
     }
@@ -45,6 +45,12 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  optimization: {
+    // 代码分离：https://webpack.docschina.org/guides/code-splitting/
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
     new CleanWebpackPlugin({}),
