@@ -4,7 +4,7 @@
   "description": "",
   "main": "tscode.js",
   "scripts": {
-    "build": "webpack --config webpack.config.ts",
+    "build": "webpack --config webpack.config.js",
     "start": "webpack serve --open"
   },
   "author": "",

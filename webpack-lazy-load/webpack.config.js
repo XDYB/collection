@@ -9,6 +9,9 @@ module.exports = {
   output: {
     filename: '[name]_[hash:8].js',
     path: path.resolve(__dirname, 'dist'),
+    environment: {
+      arrowFunction: false, // webpack拼装的代码不要箭头函数
+    }
   },
   plugins: [
     new CleanWebpackPlugin({}),
