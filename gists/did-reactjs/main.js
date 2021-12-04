@@ -4,8 +4,8 @@ import { Didact } from './did-react'
 function Counter(props) {
   const [state, setState] = Didact.useState(1)
   return (
-    <div id='Counter-div'>
-      <h1  style="cursor: pointer;" onClick={() => {
+    <div id='Counter-div' style={{ ...props.style }}>
+      <h1 style="cursor: pointer;" onClick={() => {
         setState(state + 1)
       }}>
         Hi {props.name} Count: {state}
@@ -14,7 +14,7 @@ function Counter(props) {
         {new Array(state).fill('').map((item, idx) => <span>{idx} </span>)}
       </div>
       <Random />
-      <div>文本文案</div>
+      <div>this is a text</div>
     </div>
   )
 }
@@ -32,13 +32,12 @@ function Random() {
 
 const element = (
   <div id="foo">
-    <Counter name="foo" />
-    <a>bar</a>
-    <b />
-    <div>你就不能就</div>
-    <div> d's 'v'h'd'f'b'vhdjfbvhdbv</div>
+    <Counter name="foo" style={{ 'font-size': '20px' }} />
+    <div id='text-div'>div text</div>
   </div>
 )
+
+console.log('currentRoot:element', element);
 
 const container = document.getElementById("root")
 Didact.render(element, container)

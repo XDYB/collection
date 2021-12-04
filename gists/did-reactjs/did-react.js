@@ -174,6 +174,7 @@ requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
   if (fiber.type instanceof Function) {
+    // 注释：这是函数组件执行的时候
     updateFunctionComponent(fiber)
   } else {
     updateHostComponent(fiber)
