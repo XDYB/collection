@@ -39,6 +39,5 @@ const element = (
 
 console.log('currentRoot:element', element);
 
-const container = document.getElementById("root")
-Didact.render(element, container)
+Didact.render(element, document.querySelector('body'));
 
