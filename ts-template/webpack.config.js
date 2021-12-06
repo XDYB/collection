@@ -8,7 +8,10 @@ module.exports = {
   // mode: 'production',
   mode: 'development',
   output: {
+    // `path` is the folder where Webpack will place your bundles
     path: path.resolve(__dirname, 'dist'),
+    // `publicPath` is where Webpack will load your bundles from (optional)
+    // publicPath: '//static.xxxx.com/cdn/',
     filename: '[name]_[hash:8].js',
     // `chunkFilename` provides a template for naming code-split bundles (optional)
     chunkFilename: '[name]_[hash:8]_bundle.js',
