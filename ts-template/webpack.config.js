@@ -14,7 +14,7 @@ module.exports = {
     // publicPath: '//static.xxxx.com/cdn/',
     filename: '[name]_[hash:8].js',
     // `chunkFilename` provides a template for naming code-split bundles (optional)
-    chunkFilename: '[name]_[hash:8]_bundle.js',
+    chunkFilename: 'chunks/[name]_[contenthash:8].js',
     environment: {
       arrowFunction: false, // webpack拼装的代码不要箭头函数
     }
