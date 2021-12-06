@@ -10,6 +10,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name]_[hash:8].js',
+    // `chunkFilename` provides a template for naming code-split bundles (optional)
+    chunkFilename: '[name]_[hash:8]_bundle.js',
     environment: {
       arrowFunction: false, // webpack拼装的代码不要箭头函数
     }
