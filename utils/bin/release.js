@@ -33,7 +33,7 @@ checkWorkSpaceClean()
     const version = await command(`npm version ${publishType};`);
     await command('git push');
     await command('git push --tags');
-    await command('npm publish');
+    await command('FLAG=true npm publish');
     console.log(chalk.yellow(`${version} 版本发布完成`));
     return true;
   })

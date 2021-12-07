@@ -16,7 +16,8 @@
     "build": "npm run clean && npm run build:cjs && npm run build:esm",
     "build:esm": "tsc --module ESNext --outDir dist/esm",
     "build:cjs": "tsc --module commonjs --outDir dist/lib",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "node ./bin/pre-publish.js"
   },
   "repository": {
     "type": "git",
