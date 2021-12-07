@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "cp": "cp ./dist/* ../../wiki/pages/page02",
-    "rm": "rm -rf ../../wiki/pages/page02",
+    "cp": "cp -r ./dist/* ../../wiki/pages/page02",
+    "rm": "rm -rf ../../wiki/pages/page02/*",
     "build": "webpack",
     "start": "serve dist"
   },

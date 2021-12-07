@@ -21,3 +21,4 @@ function component() {
 }
 
 document.body.appendChild(component());
+console.log('WEB_ENV:', WEB_ENV);
