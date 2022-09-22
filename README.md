@@ -1,3 +1,2 @@
-- [utils工具库开发和npm发布方案脚手架](https://github.com/luoxupan/collection/tree/master/utils)
-- [react ts 脚手架模板](https://github.com/luoxupan/collection/tree/master/ts-template)
-- [web](https://luoxupan.github.io/img/web.png)
+- [utils工具库开发和npm发布方案脚手架](https://github.com/luoxupan/collection/tree/master/scaffolding/utils)
+- [react ts 脚手架模板](https://github.com/luoxupan/collection/tree/master/scaffolding/ts-template)
